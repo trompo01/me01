@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NUESTROS LIBROS EN AMAZON - OUR BOOKS ON AMAZON</title>
+<style>
+:root{
+  --black:#000;
+  --white:#fff;
+  --radius:24px;
+  --shadow:0 0 0 1px var(--black), 0 4px 20px rgba(0,0,0,.15);
+  --shadow-hover:0 0 0 1px var(--black), 0 0 12px rgba(0,0,0,.6), 0 0 24px rgba(0,0,0,.3), 0 8px 30px rgba(0,0,0,.18);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--black);
+  font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit}
+
+/* Pages */
+.page{
+  position:absolute;
+  inset:0;
+  padding:0 1.5rem;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(12px);
+  transition:opacity .45s ease, transform .45s ease, visibility 0s linear .45s;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  background:var(--white);
+}
+.page.active{
+  position:relative;
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+  transition:opacity .45s ease, transform .45s ease;
+}
+.container{max-width:1200px;margin:0 auto}
+.page-content{max-width:720px;margin:0 auto;padding:2rem 0 5rem}
+
+/* Header */
+h1{
+  font-weight:800;
+  letter-spacing:.02em;
+  text-align:center;
+  font-size:clamp(1.3rem,3.8vw,2.15rem);
+  margin:clamp(3rem,10vh,5rem) auto clamp(2.5rem,8vh,4rem);
+  max-width:1000px;
+  line-height:1.2;
+}
+
+/* 3D Base */
+.tilt{
+  transform-style:preserve-3d;
+  will-change:transform;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;
+}
+.float{animation:float 3s ease-in-out infinite alternate}
+@keyframes float{0%{transform:translateY(0)}100%{transform:translateY(-6px)}}
+
+/* Buttons */
+.btn-3d, .link-3d{
+  position:relative;
+  display:block;
+  background:var(--white);
+  color:var(--black);
+  text-decoration:none;
+  border:1px solid var(--black);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  transform-style:preserve-3d;
+  isolation:isolate;
+}
+.btn-3d:hover,.btn-3d:focus-visible,
+.link-3d:hover,.link-3d:focus-visible{
+  box-shadow:var(--shadow-hover);
+  outline:none;
+}
+.btn-3d::before, .link-3d::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-150%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.85), transparent);
+  transform:skewX(-25deg);
+  transition:left .8s ease;
+  pointer-events:none;
+  z-index:3;
+}
+.btn-3d:hover::before, .link-3d:hover::before{left:150%}
+
+/* Sparkles */
+.spark{
+  position:absolute;
+  width:5px;height:5px;
+  border-radius:50%;
+  background:radial-gradient(circle, #000 0%, rgba(0,0,0,.75) 30%, transparent 70%);
+  pointer-events:none;
+  left:50%;top:50%;
+  z-index:4;
+  animation:spark .7s ease-out forwards;
+}
+@keyframes spark{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0;transform:translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0)}
+}
+
+/* Home */
+.home-grid{
+  display:grid;
+  gap:2.25rem;
+  grid-template-columns:1fr;
+  max-width:900px;
+  margin:0 auto;
+  padding:1rem 0 4rem;
+}
+@media(min-width:768px){
+  .home-grid{grid-template-columns:1fr 1fr;gap:3rem}
+}
+.btn-3d{
+  padding:2.5rem 2rem;
+  min-height:240px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.flag-ticker{
+  width:100%;
+  overflow:hidden;
+  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  margin-bottom:1.5rem;
+}
+.flag-track{
+  display:flex;
+  gap:2rem;
+  white-space:nowrap;
+  will-change:transform;
+  animation:marquee 15s linear infinite;
+  font-size:clamp(2rem,5vw,2.6rem);
+  line-height:1;
+}
+.flag-track span{flex-shrink:0;padding-right:2rem}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.btn-label{
+  font-size:.88rem;
+  letter-spacing:.18em;
+  font-weight:700;
+  margin-top:.25rem;
+}
+
+/* Book pages */
+.book-header{text-align:center;margin:2.5rem 0 3rem}
+.book-header h2{
+  font-size:clamp(1.5rem,4.2vw,2.2rem);
+  font-weight:800;
+  letter-spacing:.01em;
+  margin:0 0 .8rem;
+  line-height:1.2;
+}
+.book-header h3{
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(1rem,2.6vw,1.18rem);
+  margin:0 0 .6rem;
+  opacity:.82;
+}
+.book-header p{margin:0;font-size:.95rem;opacity:.68}
+
+.links-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0 .85rem;
+}
+.links-table td{padding:0}
+.link-3d{
+  padding:1.15rem 1.35rem 1.15rem 1.35rem;
+  border-radius:20px;
+  font-weight:500;
+  font-size:1rem;
+  box-shadow:0 0 0 1px var(--black), 0 3px 16px rgba(0,0,0,.12);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+}
+.link-3d::after{
+  content:'↗';
+  position:absolute;
+  right:1.2rem;
+  top:50%;
+  transform:translateY(-50%);
+  opacity:.32;
+  font-size:1.05rem;
+  transition:opacity .2s, transform .2s;
+}
+.link-3d:hover::after{opacity:.85;transform:translateY(-50%) translateX(2px)}
+
+/* Nav footers */
+.nav-footer{
+  display:grid;
+  gap:1.1rem;
+  grid-template-columns:1fr;
+  margin-top:3.5rem;
+}
+.nav-footer.two{grid-template-columns:1fr 1fr}
+@media(min-width:600px){.nav-footer.two{grid-template-columns:1fr 1fr}}
+.nav-footer .btn-3d{
+  min-height:unset;
+  padding:1.15rem 1.4rem;
+  border-radius:20px;
+}
+.nav-footer.single{max-width:320px;margin-left:auto;margin-right:auto}
+.alt-text{
+  display:inline-block;
+  font-weight:700;
+  letter-spacing:.14em;
+  font-size:.88rem;
+  transition:opacity .18s ease;
+}
+
+/* Focus */
+:focus-visible{outline:2px solid var(--black);outline-offset:3px}
+
+/* Reduce motion */
+@media (prefers-reduced-motion:reduce){
+  .float,.flag-track{animation:none}
+  .tilt,.page{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<section id="page1" class="page">
+  <div class="container">
+    <h1>NUESTROS LIBROS EN AMAZON - OUR BOOKS ON AMAZON</h1>
+    <div class="home-grid">
+      <a href="#2" class="btn-3d tilt float" aria-label="Español">
+        <div class="flag-ticker" aria-hidden="true">
+          <div class="flag-track">
+            <span>🇪🇸 🇵🇾 🇦🇷 🇺🇾 🇪🇸 🇵🇾 🇦🇷 🇺🇾</span>
+            <span>🇪🇸 🇵🇾 🇦🇷 🇺🇾 🇪🇸 🇵🇾 🇦🇷 🇺🇾</span>
+          </div>
+        <div class="btn-label">ESPAÑOL</div>
+      </a>
+      <a href="#3" class="btn-3d tilt float" aria-label="English">
+        <div class="flag-ticker" aria-hidden="true">
+          <div class="flag-track">
+            <span>🇺🇸 🇬🇧 🇦🇺 🇺🇸 🇬🇧 🇦🇺</span>
+            <span>🇺🇸 🇬🇧 🇦🇺 🇺🇸 🇬🇧 🇦🇺</span>
+          </div>
+        </div>
+        <div class="btn-label">ENGLISH</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2 -->
+<section id="page2" class="page">
+  <div class="page-content">
+    <header class="book-header">
+      <h2>CUANDO LA FAMILIA SE ROMPE EN SILENCIO</h2>
+      <h3>La historia jamás contada de una mujer que se negó a desaparecer</h3>
+      <p>Autora: Vanina Vergara</p>
+    </header>
+
+    <table class="links-table" role="presentation">
+      <tbody>
+        <tr><td><a class="link-3d tilt" href="https://open.spotify.com/episode/0NPQyJXWyQDAiU5YjKMuTu" target="_blank" rel="noopener noreferrer">Reseña hablada</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/dp/B0GX32NHDV" target="_blank" rel="noopener noreferrer">Kindle Version</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/CUANDO-FAMILIA-ROMPE-SILENCIO-desaparecer/dp/B0GXK7J5GJ/ref=tmm_pap_swatch_0" target="_blank" rel="noopener noreferrer">Tapa Blanda</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/CUANDO-FAMILIA-ROMPE-SILENCIO-desaparecer/dp/B0GXRZ1356/ref=tmm_hrd_swatch_0" target="_blank" rel="noopener noreferrer">Tapa Dura</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/CUANDO-FAMILIA-ROMPE-SILENCIO-desaparecer/dp/B0GXRZ1356/ref=cm_cr_arp_d_product_top?ie=UTF8&asin=B0GXRZ1356&revisionId=&format=4&depth=1" target="_blank" rel="noopener noreferrer">Leer Gratis</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/product-reviews/B0GXRZ1356/ref=cm_cr_dp_d_show_all_top?_encoding=UTF8&ie=UTF8&reviewerType=all_reviews" target="_blank" rel="noopener noreferrer">Hacer Reviews</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://open.spotify.com/user/317ykrwrwfzqf42uw75bcp3awzqi/playlists" target="_blank" rel="noopener noreferrer">Podcasts y Musica</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/stores/author/B0GX6FYBXK/allbooks?ingress=0&visitId=eb5af085-1ace-48ee-9c61-d47621676faa&ref_=aufs_ap_ahdr_dsk_ab&ccs_id=cc3fa529-e2e6-4fce-8dd8-10e038c3bc76" target="_blank" rel="noopener noreferrer">Sobre el Autor</a></td></tr>
+      </tbody>
+    </table>
+
+    <nav class="nav-footer two">
+      <a href="#3" class="btn-3d tilt"><span class="alt-text" data-text="NEXT" data-alt="SIGUIENTE">NEXT</span></a>
+      <a href="#1" class="btn-3d tilt"><span class="alt-text" data-text="PREVIOUS" data-alt="ANTERIOR">PREVIOUS</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section id="page3" class="page">
+  <div class="page-content">
+    <header class="book-header">
+      <h2>WHEN FAMILIES FRACTURE IN SILENCE</h2>
+      <h3>A true story of silence, loss, and a mother's fight to be seen</h3>
+      <p>Author: Vanina Vergara</p>
+    </header>
+
+    <table class="links-table" role="presentation">
+      <tbody>
+        <tr><td><a class="link-3d tilt" href="https://open.spotify.com/episode/2ZsEHMdtUXzwtVT3jvO9G7?si=IWwanv2ERhq75Pfq0itE7w" target="_blank" rel="noopener noreferrer">Spoken Review</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/When-Families-Fracture-Silence-Disappear-ebook/dp/B0GX35M57P/ref=tmm_kin_swatch_0" target="_blank" rel="noopener noreferrer">Kindle Version</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/When-Families-Fracture-Silence-Disappear/dp/B0GX7TCKHD/ref=tmm_pap_swatch_0" target="_blank" rel="noopener noreferrer">Paperback</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/dp/B0GY8741Q3" target="_blank" rel="noopener noreferrer">Hardcover</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/When-Families-Fracture-Silence-Disappear-ebook/dp/B0GX35M57P/ref=tmm_kin_swatch_0?asin=B0GX35M57P&revisionId=e5eb7937&format=3&depth=1" target="_blank" rel="noopener noreferrer">Read sample</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/product-reviews/B0GX35M57P/ref=cm_cr_dp_d_show_all_top?_encoding=UTF8&ie=UTF8&reviewerType=all_reviews" target="_blank" rel="noopener noreferrer">Write a Review</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://open.spotify.com/user/317ykrwrwfzqf42uw75bcp3awzqi/playlists" target="_blank" rel="noopener noreferrer">Handpicked Music and Podcasts</a></td></tr>
+        <tr><td><a class="link-3d tilt" href="https://www.amazon.com/stores/author/B0GX6FYBXK/allbooks?ingress=0&visitId=eb5af085-1ace-48ee-9c61-d47621676faa&ref_=aufs_ap_ahdr_dsk_ab&ccs_id=cc3fa529-e2e6-4fce-8dd8-10e038c3bc76" target="_blank" rel="noopener noreferrer">About the Author</a></td></tr>
+      </tbody>
+    </table>
+
+    <nav class="nav-footer single">
+      <a href="#2" class="btn-3d tilt"><span class="alt-text" data-text="PREVIOUS" data-alt="ANTERIOR">PREVIOUS</span></a>
+    </nav>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const pages = document.querySelectorAll('.page');
+  
+  function showPage(){
+    const hash = location.hash.replace('#','') || '1';
+    const target = document.getElementById('page' + hash) || document.getElementById('page1');
+    pages.forEach(p => p.classList.toggle('active', p === target));
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange', showPage);
+  showPage();
+
+  // 3D Tilt
+  document.querySelectorAll('.tilt').forEach(el => {
+    const strength = 12;
+    function move(e){
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      const x = (e.clientX || (e.touches && e.touches[0].clientX) || cx) - cx;
+      const y = (e.clientY || (e.touches && e.touches[0].clientY) || cy) - cy;
+      const rx = (-y / strength);
+      const ry = (x / strength);
+      el.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px)`;
+    }
+    function reset(){
+      el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+    }
+    el.addEventListener('mousemove', move);
+    el.addEventListener('mouseleave', reset);
+    el.addEventListener('touchmove', move, {passive:true});
+    el.addEventListener('touchend', reset);
+  });
+
+  // Alternating text
+  document.querySelectorAll('.alt-text').forEach(span => {
+    const a = span.dataset.text;
+    const b = span.dataset.alt;
+    let alt = false;
+    setInterval(() => {
+      alt = !alt;
+      span.style.opacity = '0';
+      setTimeout(() => {
+        span.textContent = alt ? b : a;
+        span.style.opacity = '1';
+      }, 150);
+    }, 2500);
+  });
+
+  // Sparkling effect
+  function sparkle(el){
+    for(let i=0;i<8;i++){
+      const s = document.createElement('i');
+      s.className = 'spark';
+      const ang = Math.random() * Math.PI * 2;
+      const dist = 18 + Math.random() * 36;
+      s.style.setProperty('--tx', Math.cos(ang) * dist + 'px');
+      s.style.setProperty('--ty', Math.sin(ang) * dist + 'px');
+      s.style.left = (30 + Math.random()*40) + '%';
+      s.style.top = (30 + Math.random()*40) + '%';
+      el.appendChild(s);
+      setTimeout(() => s.remove(), 700);
+    }
+  }
+  document.querySelectorAll('.btn-3d, .link-3d').forEach(el => {
+    el.addEventListener('mouseenter', () => sparkle(el));
+    el.addEventListener('focus', () => sparkle(el));
+  });
+});
+</script>
+</body>
+</html>
