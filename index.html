@@ -1,58 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MIS LIBROS EN AMAZON - MY BOOKS ON AMAZON</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mis Libros - Vanina Vergara</title>
 <style>
-:root{--black:#000;--white:#fff}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--white);color:var(--black);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
-.wrap{max-width:720px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;flex-direction:column}
-h1{font-size:clamp(1.4rem,4vw,2rem);text-align:center;margin:24px 0 32px;font-weight:700;letter-spacing:.02em}
-h2{font-size:clamp(1.2rem,3.5vw,1.6rem);text-align:center;margin:16px 0 8px;font-weight:700}
-h3{font-size:1rem;text-align:center;margin:0 0 12px;font-weight:400;font-style:italic}
-.author{text-align:center;margin:0 0 24px;font-weight:600}
-.center{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:28px}
-.btn-3d{display:inline-block;padding:18px 26px;background:var(--white);color:var(--black);border:2px solid var(--black);border-radius:14px;text-decoration:none;font-weight:700;letter-spacing:.02em;box-shadow:0 6px 0 var(--black),0 8px 14px rgba(0,0,0,.12);transition:transform .08s ease,box-shadow .08s ease;text-align:center;min-width:220px}
-.btn-3d:hover{transform:translateY(-2px);box-shadow:0 8px 0 var(--black),0 12px 20px rgba(0,0,0,.18);text-shadow:0 0 8px rgba(0,0,0,.25)}
-.btn-3d:active{transform:translateY(3px);box-shadow:0 3px 0 var(--black)}
-.btn-small{padding:12px 18px;min-width:140px;font-size:.95rem}
-.flag-cycle{position:relative;height:34px;width:60px;margin:0 auto 6px}
-.flag-cycle span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;opacity:0;animation:flag 8s infinite}
-.flag-cycle.es span:nth-child(1){animation-delay:0s}
-.flag-cycle.es span:nth-child(2){animation-delay:2s}
-.flag-cycle.es span:nth-child(3){animation-delay:4s}
-.flag-cycle.es span:nth-child(4){animation-delay:6s}
-.flag-cycle.en span:nth-child(1){animation-delay:0s}
-.flag-cycle.en span:nth-child(2){animation-delay:2.66s}
-.flag-cycle.en span:nth-child(3){animation-delay:5.33s}
-@keyframes flag{0%{opacity:0}3%{opacity:1}30%{opacity:1}33%{opacity:0}100%{opacity:0}}
-table{width:100%;border-collapse:collapse;margin:16px 0 32px}
-td{padding:0;border-bottom:1px solid #e5e5e5}
-td a{display:block;padding:16px 12px;text-decoration:none;color:var(--black);font-weight:600;border-left:3px solid transparent;transition:all .08s}
-td a:hover{border-left:3px solid var(--black);background:#fafafa;text-shadow:0 0 6px rgba(0,0,0,.2);transform:translateX(2px)}
-.footer{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:auto;padding-top:24px;border-top:1px solid #eee}
-.alt::after{content:attr(data-en);animation:alt 4s infinite}
-@keyframes alt{0%,45%{content:attr(data-en)}50%,95%{content:attr(data-es)}100%{content:attr(data-en)}}
-.note{text-align:center;font-size:.85rem;color:#555;margin-top:12px}
-@media (max-width:480px){.btn-3d{min-width:180px;padding:16px 20px}}
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  background: #fff;
+  color: #000;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+}
+.container { width: 100%; max-width: 720px; margin: 0 auto; }
+h1 { font-size: 1.8rem; text-align: center; margin: 24px 0 8px; font-weight: 700; }
+h2 { font-size: 1.1rem; text-align: center; margin-bottom: 6px; font-weight: 400; }
+h3 { font-size: 1rem; text-align: center; margin-bottom: 24px; font-weight: 400; color: #333; }
+
+.btn-3d {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 28px;
+  background: #fff;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 14px;
+  box-shadow: 0 6px 0 #000, 0 8px 16px rgba(0,0,0,0.12);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  margin: 12px;
+}
+.btn-3d:hover { transform: translateY(-1px); box-shadow: 0 7px 0 #000, 0 10px 18px rgba(0,0,0,0.16); }
+.btn-3d:active { transform: translateY(4px); box-shadow: 0 2px 0 #000; }
+.btn-3d.no-click { cursor: default; pointer-events: none; }
+.btn-3d img { height: 28px; width: auto; display: block; }
+.spark { position: relative; }
+.spark:hover::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, transparent 40%, rgba(0,0,0,0.08) 50%, transparent 60%);
+}
+
+.center { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; width: 100%; }
+.row { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 32px 0; }
+
+table { width: 100%; border-collapse: collapse; margin: 24px 0; border: 2px solid #000; }
+th { background: #000; color: #fff; padding: 14px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+td { border-top: 1px solid #000; padding: 0; }
+td a { display: block; padding: 14px 16px; color: #000; text-decoration: none; font-weight: 500; }
+td a:hover { background: #f5f5f5; text-decoration: underline; }
+
+.footer { margin-top: auto; padding: 32px 0 16px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; width: 100%; }
+
+.flag { font-size: 1.8rem; line-height: 1; }
+@media (max-width: 600px) {
+  .btn-3d { width: 100%; max-width: 320px; }
+  h1 { font-size: 1.5rem; }
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-<h1>NUESTROS LIBROS EN AMAZON . OUR BOOKS ON AMAZON</h1>
-<div class="center">
-<a href="pagina2.html" class="btn-3d" aria-label="Versión en español">
-<div class="flag-cycle es"><span>🇪🇸</span><span>🇵🇾</span><span>🇦🇷</span><span>🇺🇾</span></div>
-ESPAÑOL
-</a>
-<a href="page3.html" class="btn-3d" aria-label="English version">
-<div class="flag-cycle en"><span>🇺🇸</span><span>🇬🇧</span><span>🇦🇺</span></div>
-ENGLISH
-</a>
+<div class="container center">
+  <div style="margin-top:40px; margin-bottom: 60px;">
+    <div class="btn-3d no-click" id="topBtn" style="min-width:280px;">
+      <span id="topText">MIS LIBROS EN AMAZON</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <a href="page2.html" class="btn-3d spark">
+      <img id="flagEs" src="flag_spain.jpg" alt="ES" style="height:24px;width:36px;object-fit:cover;border:1px solid #000;border-radius:3px;">
+      <span>Español</span>
+    </a>
+    <a href="page3.html" class="btn-3d spark">
+      <img id="flagEn" src="flag_usa.jpg" alt="EN" style="height:24px;width:36px;object-fit:cover;border:1px solid #000;border-radius:3px;">
+      <span>English</span>
+    </a>
+  </div>
 </div>
-<p class="note">Minimalist template · White background · Black letters</p>
-</div>
+
+<script>
+const topPhrases = ["MIS LIBROS EN AMAZON","MY BOOKS ON AMAZON"];
+let ti=0; setInterval(()=>{ ti=(ti+1)%2; document.getElementById('topText').textContent=topPhrases[ti]; }, 3000);
+
+const flagsEs = ["flag_spain.jpg","flag_paraguay.jpg","flag_argentina.jpg","flag_uruguay.jpg"];
+let fe=0; setInterval(()=>{ fe=(fe+1)%flagsEs.length; document.getElementById('flagEs').src=flagsEs[fe]; }, 1800);
+
+const flagsEn = ["flag_usa.jpg","flag_uk.jpg","flag_australia.jpg"];
+let fn=0; setInterval(()=>{ fn=(fn+1)%flagsEn.length; document.getElementById('flagEn').src=flagsEn[fn]; }, 1800);
+</script>
 </body>
 </html>
