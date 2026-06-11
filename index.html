@@ -1,29 +1,432 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>EL PUBLICO OLVIDADO DEL MUNDIAL 2026 * ACTUALIZACION DIARIA*</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliografía - Vanina Vergara & Pablo Mera</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0a0a0a;
+            --white-text: #ffffff;
+            --neon-accent: #00ff00;
+            --neon-blue: #00d4ff;
+            --neon-purple: #ff00ff;
+            --subtle-border: #1a1a1a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            color: var(--white-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        body {
+            perspective: 1200px;
+        }
+
+        /* Audio Player */
+        audio {
+            display: none;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 2px solid var(--neon-accent);
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.05), rgba(0, 212, 255, 0.05));
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--white-text), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--neon-accent);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Grid Container */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            width: 100%;
+            max-width: 700px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @media (min-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+                max-width: 600px;
+            }
+        }
+
+        /* 3D Button Cells */
+        .book-button {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            border: 2px solid var(--neon-accent);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .book-button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.1);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .book-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Sparking Effect */
+        .book-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 0, 0.1) 50%, transparent 70%);
+            animation: sparkle 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Language/Navigation Buttons Section */
+        .nav-section {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            margin-top: 2rem;
+        }
+
+        .nav-button {
+            position: relative;
+            padding: 1rem 2rem;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--white-text);
+            background: var(--glass-bg);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-button:hover {
+            background: var(--glass-bg);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
+        }
+
+        .flag-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 2rem;
+            height: 1.5rem;
+            overflow: hidden;
+        }
+
+        .flag {
+            font-size: 1.5rem;
+            animation: scrollFlags 6s linear infinite;
+        }
+
+        @keyframes scrollFlags {
+            0%, 100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            33% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            34% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            35% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            36% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            66% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            67% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            68% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            69% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Footer */
+        footer {
+            padding: 1rem;
+            text-align: center;
+            color: var(--neon-accent);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--subtle-border);
+            margin-top: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mouse Tilt Effect */
+        .tilt-container {
+            transform-style: preserve-3d;
+            perspective: 1200px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                max-width: 100%;
+            }
+
+            .book-button {
+                border-radius: 6px;
+            }
+
+            .nav-section {
+                gap: 1rem;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-<h1>EL PUBLICO OLVIDADO DEL MUNDIAL 2026 <span style="color:#00e5ff">* ACTUALIZACION DIARIA*</span></h1>
-<h2>QUE SABER DE FUTBOL CUANDO EL MUNDIAL, LA FIFA y LA CONMEBOL TE IMPORTAN CERO</h2>
-<p class="desc">Si no sabes los colores de las camisetas, ni los nombres de los jugadores o si preferís ver una serie o leer un libro mientras se juega una final, este es tu lugar. <em>*Todos los días algo nuevo*</em></p>
-<div class="neon-line"></div>
-</header>
+    <audio id="bgMusic" loop>
+        <source src="kelvin.aac" type="audio/aac">
+        Your browser does not support the audio element.
+    </audio>
 
-<div class="grid2">
-  <a href="pagina2.html" class="btn3d tilt" aria-label="Argentina"><img src="ar.jpg" alt="AR"></a>
-  <a href="pagina4.html" class="btn3d tilt" aria-label="Uruguay"><img src="uy.jpg" alt="UY"></a>
-  <a href="pagina3.html" class="btn3d tilt" aria-label="Paraguay"><img src="py.jpg" alt="PY"></a>
-  <a href="pagina5.html" class="btn3d tilt" aria-label="Libros"><img src="libros.jpg" alt="LIBROS"></a>
-</div>
+    <header>
+        <h1>Bibliografía</h1>
+        <p class="subtitle">Vanina Vergara & Pablo Mera</p>
+    </header>
 
-<p class="small">Diseño minimalista • fondo oscuro • contraste alto • mobile first</p>
-</div>
-<script src="script.js"></script>
+    <div class="container">
+        <div class="grid-container">
+            <a href="page2.htm" class="book-button">
+                <img src="vesp.jpg" alt="Cuando la Familia se Rompe en Silencio">
+            </a>
+            <a href="page3.htm" class="book-button">
+                <img src="pesp.jpg" alt="Manual del Inadaptado Lúcido">
+            </a>
+            <a href="page4.htm" class="book-button">
+                <img src="lamp.jpg" alt="El Jardín de los que Volvieron">
+            </a>
+            <a href="page5.htm" class="book-button">
+                <img src="EJDL.jpg" alt="El Jardín de Luma">
+            </a>
+            <a href="page6.htm" class="book-button">
+                <img src="crc.jpg" alt="Caracol - Menú de Autor">
+            </a>
+            <a href="page7.htm" class="book-button">
+                <img src="CRCENG.png" alt="Caracol Author's Menu">
+            </a>
+            <a href="page8.htm" class="book-button">
+                <img src="veng.jpg" alt="When Families Fracture in Silence">
+            </a>
+            <a href="page9.htm" class="book-button">
+                <img src="peng.jpg" alt="The Lucid Misfit's Handbook">
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <a href="page2.htm" class="nav-button">
+                <span class="flag-container">
+                    <span class="flag">🇪🇸🇵🇾🇦🇷🇺🇾</span>
+                </span>
+                <span>[ESPAÑOL]</span>
+            </a>
+            <a href="page7.htm" class="nav-button">
+                <span class="flag-container">
+                    <span class="flag">🇺🇸🇬🇧🇦🇺</span>
+                </span>
+                <span>[ENGLISH]</span>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Vanina Vergara & Pablo Mera. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Auto-play music
+        window.addEventListener('load', function() {
+            const audio = document.getElementById('bgMusic');
+            audio.play().catch(err => console.log('Audio autoplay prevented:', err));
+        });
+
+        // 3D Tilt Effect
+        document.querySelectorAll('.book-button').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const rotateX = (y - rect.height / 2) / 10;
+                const rotateY = (rect.width / 2 - x) / 10;
+                
+                button.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+
+        // Gentle float animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+            }
+            
+            header {
+                animation: fadeInDown 0.8s ease-out, float 3s ease-in-out infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>

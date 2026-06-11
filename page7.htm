@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caracol Author's Menu - Bibliography</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0a0a0a;
+            --white-text: #ffffff;
+            --neon-accent: #00ff00;
+            --neon-blue: #00d4ff;
+            --neon-purple: #ff00ff;
+            --subtle-border: #1a1a1a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            color: var(--white-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-image: url('CRCENG.png');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            perspective: 1200px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.87);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        audio {
+            display: none;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 2px solid var(--neon-blue);
+            background: rgba(0, 0, 0, 0.8);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--white-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            color: var(--neon-blue);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Cover Image */
+        .cover-image {
+            max-width: 300px;
+            margin: 2rem auto;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .cover-image img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            text-align: center;
+            margin: 2rem 0;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .countdown-title {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 600;
+            color: var(--neon-purple);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .countdown-item {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            padding: 1rem;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--neon-accent);
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .countdown-label {
+            font-size: 0.85rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer Navigation */
+        footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2rem 1rem;
+            border-top: 2px solid var(--subtle-border);
+            margin-top: auto;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .nav-btn {
+            position: relative;
+            padding: 0.8rem 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--white-text);
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .countdown-number {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .countdown {
+                gap: 0.8rem;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="kelvin.aac" type="audio/aac">
+    </audio>
+
+    <header>
+        <h1>Caracol Author's Menu</h1>
+        <p class="subtitle">Inside the Nightclub That Changed Nightlife Forever</p>
+        <p class="subtitle">The Story of a Unique Place, Told by Someone Who Survived to Narrate It.</p>
+    </header>
+
+    <div class="container">
+        <!-- Cover Image -->
+        <div class="cover-image">
+            <img src="CRCENG.png" alt="Caracol Author's Menu">
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-section">
+            <div class="countdown-title">Launch Countdown</div>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">0</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">0</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">0</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">0</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <a href="page8.htm" class="nav-btn">NEXT → SIGUIENTE</a>
+            <a href="page6.htm" class="nav-btn">← PREVIOUS ANTERIOR</a>
+        </footer>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        
+        window.addEventListener('load', function() {
+            audio.play().catch(err => console.log('Audio autoplay prevented:', err));
+        });
+
+        // Countdown Timer
+        function updateCountdown() {
+            const targetDate = new Date('June 14, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>

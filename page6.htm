@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caracol Menú de Autor - Bibliografía</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0a0a0a;
+            --white-text: #ffffff;
+            --neon-accent: #00ff00;
+            --neon-blue: #00d4ff;
+            --subtle-border: #1a1a1a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            color: var(--white-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-image: url('crc.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            perspective: 1200px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.87);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        audio {
+            display: none;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 2px solid var(--neon-accent);
+            background: rgba(0, 0, 0, 0.8);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--white-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            color: var(--neon-accent);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Links Table */
+        .links-table {
+            width: 100%;
+            margin: 2rem 0;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .links-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--neon-accent);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .links-table th {
+            background: linear-gradient(90deg, rgba(0, 255, 0, 0.2), rgba(0, 212, 255, 0.2));
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--neon-accent);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .links-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--subtle-border);
+        }
+
+        .links-table a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+        }
+
+        .links-table a:hover {
+            color: var(--neon-accent);
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            transform: translateX(5px);
+        }
+
+        /* Action Button */
+        .action-btn {
+            position: relative;
+            padding: 1rem 2rem;
+            margin: 2rem 0;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--white-text);
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--neon-accent);
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            align-self: center;
+            min-width: 200px;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .action-btn:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), inset 0 0 10px rgba(0, 255, 0, 0.1);
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .action-btn img {
+            height: 1.5rem;
+            width: auto;
+        }
+
+        /* Footer Navigation */
+        footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2rem 1rem;
+            border-top: 2px solid var(--subtle-border);
+            margin-top: auto;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .nav-btn {
+            position: relative;
+            padding: 0.8rem 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--white-text);
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .links-table th, .links-table td {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            .links-table a {
+                font-size: 0.9rem;
+            }
+
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="kelvin.aac" type="audio/aac">
+    </audio>
+
+    <header>
+        <h1>Caracol – Menú de Autor</h1>
+        <p class="subtitle">Memorias de la Discoteca que Transformó la Noche</p>
+    </header>
+
+    <div class="container">
+        <!-- Links Table -->
+        <div class="links-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Enlaces Disponibles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.amazon.com/dp/B0H2RT4F8M" target="_blank">📱 Versión Kindle</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/dp/B0H3KWW8F6" target="_blank">📖 Tapa Blanda</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/dp/B0H3KGMQVJ" target="_blank">📚 Tapa Dura</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/dp/B0H2RT4F8M" target="_blank">🆓 Leer Gratis</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/product-reviews/B0H2RT4F8M/" target="_blank">⭐ Hacer un Review</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.goodreads.com/book/show/252917998-caracol-men-de-autor" target="_blank">📚 Goodreads</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://pablomera.blogspot.com/2026/05/caracol-1993-playlist.html" target="_blank">🎵 Música de Caracol de los 90s</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/stores/author/B0GYVD1VV3/allbooks" target="_blank">👤 Blog Personal</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Action Button -->
+        <a href="https://www.amazon.com/dp/B0H3KGMQVJ" target="_blank" class="action-btn">
+            Comprar en Amazon
+        </a>
+
+        <footer>
+            <a href="page7.htm" class="nav-btn">SIGUIENTE → NEXT</a>
+            <a href="page5.htm" class="nav-btn">← ANTERIOR PREVIOUS</a>
+        </footer>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        
+        window.addEventListener('load', function() {
+            audio.play().catch(err => console.log('Audio autoplay prevented:', err));
+        });
+    </script>
+</body>
+</html>

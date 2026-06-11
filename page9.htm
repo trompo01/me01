@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lucid Misfit's Handbook - Bibliography</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0a0a0a;
+            --white-text: #ffffff;
+            --neon-accent: #00ff00;
+            --neon-blue: #00d4ff;
+            --subtle-border: #1a1a1a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg);
+            color: var(--white-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-image: url('peng.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            perspective: 1200px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 10, 0.87);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        audio {
+            display: none;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 2px solid var(--neon-blue);
+            background: rgba(0, 0, 0, 0.8);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 2.3rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--white-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            color: var(--neon-blue);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .author {
+            font-size: 0.95rem;
+            color: var(--neon-accent);
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Links Table T7.1 */
+        .links-table {
+            width: 100%;
+            margin: 2rem 0;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .links-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .links-table th {
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), rgba(0, 255, 0, 0.2));
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--neon-blue);
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .links-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--subtle-border);
+        }
+
+        .links-table a {
+            color: var(--neon-accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+        }
+
+        .links-table a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            transform: translateX(5px);
+        }
+
+        /* Retailer Grid T7.2 */
+        .retailer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        @media (min-width: 600px) {
+            .retailer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 900px) {
+            .retailer-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .retailer-btn {
+            position: relative;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            background: rgba(0, 212, 255, 0.1);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .retailer-btn:hover {
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.6), inset 0 0 15px rgba(0, 212, 255, 0.1);
+            transform: translateY(-5px) scale(1.08);
+            background: rgba(0, 212, 255, 0.2);
+        }
+
+        .retailer-btn img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        /* Footer Navigation */
+        footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 2rem 1rem;
+            border-top: 2px solid var(--subtle-border);
+            margin-top: auto;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .nav-btn {
+            position: relative;
+            padding: 0.8rem 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--white-text);
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .links-table th, .links-table td {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            .links-table a {
+                font-size: 0.9rem;
+            }
+
+            header {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="kelvin.aac" type="audio/aac">
+    </audio>
+
+    <header>
+        <h1>The Lucid Misfit's Handbook</h1>
+        <p class="subtitle">Exploring The Voluntarily Invisible in our Shared Life</p>
+        <p class="author">Author: Pablo Mera</p>
+    </header>
+
+    <div class="container">
+        <!-- T7.1: Links Table -->
+        <div class="links-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Available Links</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://open.spotify.com/episode/5InbATRatdsqyWipxhgBuv" target="_blank">🎙 Spoken Review on Spotify</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/LUCID-MISFITS-HANDBOOK-Exploring-Voluntarily-ebook/dp/B0GYMCM3N3/" target="_blank">📱 Kindle Version</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/LUCID-MISFITS-HANDBOOK-Exploring-Voluntarily/dp/B0GYPK6397/" target="_blank">📖 Paperback</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/LUCID-MISFITS-HANDBOOK-Exploring-Voluntarily/dp/B0GYNYJFD5/" target="_blank">📚 Hardcover</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/LUCID-MISFITS-HANDBOOK-Exploring-Voluntarily/dp/B0GYNYJFD5/" target="_blank">🆓 Read Sample</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/product-reviews/B0GYNYJFD5/" target="_blank">⭐ Write a Review</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://open.spotify.com/user/31egimzo6jur5btr4tmxl5cbyfpe/playlists" target="_blank">🎵 Handpicked Music and Podcasts</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.goodreads.com/book/show/251502207-the-lucid-misfit-s-handbook" target="_blank">📚 Goodreads</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.amazon.com/stores/author/B0GYVD1VV3/allbooks" target="_blank">👤 About the Author</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://pablomera.blogspot.com/" target="_blank">✍ Personal Blog</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- T7.2: Retailer Grid -->
+        <div class="retailer-grid">
+            <a href="https://www.amazon.com/LUCID-MISFITS-HANDBOOK-Exploring-Voluntarily/dp/B0GYPK6397/" target="_blank" class="retailer-btn">
+                <img src="amazon.png" alt="Amazon">
+            </a>
+            <a href="https://www.booksamillion.com/p/Lucid-Misfits-Handbook/Pablo-Mera/9798259022409" target="_blank" class="retailer-btn">
+                <img src="bam.png" alt="Books-A-Million">
+            </a>
+            <a href="https://bookshop.org/p/books/the-lucid-misfit-s-handbook-exploring-the-voluntarily-invisible-in-our-shared-life-pablo-mera/7e540685097c0cf9" target="_blank" class="retailer-btn">
+                <img src="bookshoporg.png" alt="Bookshop.org">
+            </a>
+            <a href="https://www.books.com.tw/products/F01c038522" target="_blank" class="retailer-btn">
+                <img src="bookstw.png" alt="Books.com.tw">
+            </a>
+            <a href="https://www.saxo.com/dk/the-lucid-misfits-handbook-exploring-the-voluntarily-invisible-in-our-shared-life_bog_9798259022409" target="_blank" class="retailer-btn">
+                <img src="saxo.jpg" alt="Saxo">
+            </a>
+            <a href="https://www.ibs.it/lucid-misfit-s-handbook-exploring-libro-inglese-pablo-mera/e/9798259022409" target="_blank" class="retailer-btn">
+                <img src="ibs.png" alt="IBS">
+            </a>
+            <a href="https://www.lafeltrinelli.it/lucid-misfit-s-handbook-exploring-libro-inglese-pablo-mera/e/9798259022409" target="_blank" class="retailer-btn">
+                <img src="feltri.png" alt="La Feltrinelli">
+            </a>
+            <a href="https://www.bol.com/nl/nl/p/the-lucid-misfit-s-handbook-exploring-the-voluntarily-invisible-in-our-shared-life/9300000280579611/" target="_blank" class="retailer-btn">
+                <img src="bol.jpg" alt="Bol.com">
+            </a>
+        </div>
+
+        <footer>
+            <a href="index.htm" class="nav-btn">NEXT → SIGUIENTE</a>
+            <a href="page8.htm" class="nav-btn">← PREVIOUS ANTERIOR</a>
+        </footer>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        
+        window.addEventListener('load', function() {
+            audio.play().catch(err => console.log('Audio autoplay prevented:', err));
+        });
+
+        // 3D Tilt for retailer buttons
+        document.querySelectorAll('.retailer-btn').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const rotateX = (y - rect.height / 2) / 8;
+                const rotateY = (rect.width / 2 - x) / 8;
+                
+                button.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+    </script>
+</body>
+</html>
